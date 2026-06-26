@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Heart Disease Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+        <h2>🩺 Patient Details</h2>
+
+        <form action="/predict" method="POST">
+
+            <input type="number" name="age"
+                   placeholder="Age" required>
+
+            <input type="number" name="chol"
+                   placeholder="Cholesterol" required>
+
+            <input type="number" name="bp"
+                   placeholder="Blood Pressure" required>
+
+            <input type="number" name="hr"
+                   placeholder="Heart Rate" required>
+
+            <button type="submit">
+                Predict Risk
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- CENTER PANEL -->
+
+    <div class="center-panel">
+    <h1><span class="heart-emoji">❤️</span>Heart Disease Predictor</h1>
+
+    <div class="image-card">
+        <img src="{{ url_for('static', filename='images/human.png') }}"
+             class="human-body">
+    </div>
+</div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+    {% if prediction %}
+    <div class="result-card">
+        <h2>Prediction Result</h2>
+
+        <div class="status-badge">
+            {{ prediction }}
+        </div>
+
+        <div class="circle">
+            <span>{{ risk }}%</span>
+        </div>
+
+        <div class="result-text">
+            Risk Score
+        </div>
+
+        <div class="result-note">
+            Based on Age, Cholesterol, Blood Pressure and Heart Rate values.
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+</body>
+</html>
